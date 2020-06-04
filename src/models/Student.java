@@ -1,36 +1,36 @@
 package models;
 
 public class Student {
-	private Long studentId;
-	private String firstname;
-	private String lastname;
+	public int id;
+	public String firstName;
+	public String lastName;
 	
 	public Student() {	
 	}
 	
-	public Student(Long id, String username, String password) {
+	public Student(int id, String firstName, String lastName) {
 		super();
-		this.studentId = id;
-		this.firstname = username;
-		this.lastname = password;
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	
-	public Long getId() {
-		return studentId;
+	public int getId() {
+		return id;
 	}
-	public void setId(Long id) {
-		this.studentId = id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getFirstName() {
-		return firstname;
+		return firstName;
 	}
 	public void setFirstName(String firstname) {
-		this.firstname = firstname;
+		this.firstName = firstname;
 	}
 	public String getLastName() {
-		return lastname;
+		return lastName;
 	}
 	public void setLastName(String lastname) {
-		this.lastname = lastname;
+		this.lastName = lastname;
 	}
 }

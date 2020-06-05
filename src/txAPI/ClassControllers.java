@@ -18,7 +18,8 @@ import services.ClassService;
 @Produces(MediaType.APPLICATION_JSON) 
 @Consumes(MediaType.APPLICATION_JSON) 
 public class ClassControllers {
-private ClassService _classService = new ClassService();
+	
+	private ClassService _classService = new ClassService();
 	
 	@GET  
     public Response getClasses() {

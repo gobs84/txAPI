@@ -1,26 +1,25 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import models.MockDB;
 import models.Student;
 
 public class StudentService {
 	
-	private static final List<Student> students= new ArrayList<Student>();
+	public MockDB database;
 	
-	static {
-		students.add(new Student(1, "Gabriel", "Perez"));
-		students.add(new Student(2, "Sebastian", "Parker"));
-		students.add(new Student(3, "Peter", "Quill"));
-	}
-	 
+	public StudentService() {
+		database = MockDB.Instance();
+	}	 
 	
     public List<Student> getStudents() {
+    	List<Student> students = database.students;
     	return students;
     }
 	
     public Student getStudent(int studentId) {
+    	List<Student> students = database.students;
     	Student student = new Student();
     	for (Student studentTemp: students) {
 			if(studentTemp.getId()== studentId) {
@@ -32,12 +31,14 @@ public class StudentService {
     }
 	
 	public Student CreateStudent(Student student) {
+		List<Student> students = database.students;
 		student.setId(GenerateId());
 		students.add(student);
 		return student; 
 	}
 	
 	public Student UpdateStudent(Student student) {
+		List<Student> students = database.students;
 		for (Student studentTemp: students) {
 			if(studentTemp.getId()== student.getId()) {
 				studentTemp.setFirstName(student.getFirstName());
@@ -49,6 +50,7 @@ public class StudentService {
 	}
 	
 	public void DeleteStudent(int studentId) {
+		List<Student> students = database.students;
 		for (Student studentTemp: students) {
 			if(studentTemp.getId()== studentId) {
 				students.remove(studentTemp);
@@ -58,6 +60,7 @@ public class StudentService {
 	}
 	
 	private int GenerateId() {
+		List<Student> students = database.students;
 		int id = 0;
 		for (Student student: students) {
 			if(student.getId()>id) {

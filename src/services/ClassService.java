@@ -1,25 +1,26 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import models.Class;
+import models.MockDB;
 
 public class ClassService {
-private static final List<Class> classes= new ArrayList<Class>();
 	
-	static {
-		classes.add(new Class(1, "Math", ""));
-		classes.add(new Class(2, "History", ""));
-		classes.add(new Class(3, "English", ""));
+	public MockDB database;
+	
+	public ClassService() {
+		database = MockDB.Instance();
 	}
 	 
 	
     public List<Class> getClasses() {
+    	List<Class> classes= database.classes;
     	return classes;
     }
 	
     public Class getClass(int classId) {
+    	List<Class> classes= database.classes;
     	Class classO = new Class();
     	for (Class classTemp: classes) {
 			if(classTemp.getId()== classId) {
@@ -31,12 +32,14 @@ private static final List<Class> classes= new ArrayList<Class>();
     }
 	
 	public Class CreateClass(Class classO) {
+		List<Class> classes= database.classes;
 		classO.setId(GenerateId());
 		classes.add(classO);
 		return classO; 
 	}
 	
 	public Class UpdateClass(Class classO) {
+		List<Class> classes= database.classes;
 		for (Class classTemp: classes) {
 			if(classTemp.getId()== classO.getId()) {
 				classTemp.setTitle(classO.getTitle());
@@ -48,6 +51,7 @@ private static final List<Class> classes= new ArrayList<Class>();
 	}
 	
 	public Boolean DeleteClass(int classId) {
+		List<Class> classes= database.classes;
 		Boolean flag = false;
 		for (Class classTemp: classes) {
 			if(classTemp.getId()== classId) {
@@ -60,6 +64,7 @@ private static final List<Class> classes= new ArrayList<Class>();
 	}
 	
 	private int GenerateId() {
+		List<Class> classes= database.classes;
 		int id = 0;
 		for (Class classO: classes) {
 			if(classO.getId()>id) {

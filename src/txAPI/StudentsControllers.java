@@ -8,7 +8,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces; 
 import javax.ws.rs.core.MediaType; 
-import javax.ws.rs.core.Response; 
+import javax.ws.rs.core.Response;
+
+import services.ServiceException;
 import services.StudentService;
 import models.Student;
 
@@ -26,23 +28,23 @@ public class StudentsControllers {
 	
 	@GET
 	@Path("{studentId}")
-    public Response getStudent(@PathParam("studentId") int studentId) {     
+    public Response getStudent(@PathParam("studentId") int studentId) throws ServiceException {     
         return Response.ok(_studentService.getStudent(studentId)).build();   
     }
 	
 	@POST
-	public Response CreateStudent(Student student) {
+	public Response CreateStudent(Student student) throws ServiceException {
 		return Response.ok(_studentService.CreateStudent(student)).build(); 
 	}
 	
 	@PUT
-	public Response UpdateStudent(Student student) {
+	public Response UpdateStudent(Student student) throws ServiceException {
 		return Response.ok(_studentService.UpdateStudent(student)).build();
 	}
 	
 	@DELETE
 	@Path("{studentId}")
-	public Response DeleteStudent(@PathParam("studentId") int studentId) {
+	public Response DeleteStudent(@PathParam("studentId") int studentId) throws ServiceException {
 		_studentService.DeleteStudent(studentId);
 		return Response.ok("Student Deleted").build();
 	}

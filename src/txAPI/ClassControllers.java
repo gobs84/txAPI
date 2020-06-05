@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import models.Class;
 import services.ClassService;
+import services.ServiceException;
 
 @Path("/classes") 
 @Produces(MediaType.APPLICATION_JSON) 
@@ -28,23 +29,23 @@ public class ClassControllers {
 	
 	@GET
 	@Path("{classId}")
-    public Response getClass(@PathParam("classId") int classId) {     
+    public Response getClass(@PathParam("classId") int classId) throws ServiceException {     
         return Response.ok(_classService.getClass(classId)).build();   
     }
 	
 	@POST
-	public Response CreateClass(Class classO) {
+	public Response CreateClass(Class classO) throws ServiceException {
 		return Response.ok(_classService.CreateClass(classO)).build(); 
 	}
 	
 	@PUT
-	public Response UpdateClass(Class classO) {
+	public Response UpdateClass(Class classO) throws ServiceException {
 		return Response.ok(_classService.UpdateClass(classO)).build();
 	}
 	
 	@DELETE
 	@Path("{classId}")
-	public Response DeleteClass(@PathParam("classId") int classId) {
+	public Response DeleteClass(@PathParam("classId") int classId) throws ServiceException {
 		_classService.DeleteClass(classId);
 		return Response.ok("Class Deleted").build();
 	}

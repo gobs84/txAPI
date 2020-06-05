@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import models.Assignment;
 import services.AssignmentService;
+import services.ServiceException;
 
 @Path("/assignments") 
 @Produces(MediaType.APPLICATION_JSON) 
@@ -23,29 +24,29 @@ public class AssignmentControllers {
 	
 	@GET
 	@Path("classId/{classId}")
-    public Response getClassAssignments(@PathParam("classId") int classId) {
+    public Response getClassAssignments(@PathParam("classId") int classId) throws ServiceException {
         return Response.ok(_assignmentService.getClassStudents(classId)).build();   
     }
 	
 	@GET
 	@Path("/studentId/{studentId}")
-    public Response getStudentsAssignment(@PathParam("studentId") int studentId) {     
+    public Response getStudentsAssignment(@PathParam("studentId") int studentId) throws ServiceException {     
         return Response.ok(_assignmentService.getStudentClasses(studentId)).build();   
     }
 	
 	@POST
-	public Response CreateAssignment(Assignment assignment) {
+	public Response CreateAssignment(Assignment assignment) throws ServiceException {
 		return Response.ok(_assignmentService.CreateAssignment(assignment)).build(); 
 	}
 	
 	@PUT
-	public Response UpdateAssignment(Assignment assignment) {
+	public Response UpdateAssignment(Assignment assignment) throws ServiceException {
 		return Response.ok(_assignmentService.UpdateAssignment(assignment)).build();
 	}
 	
 	@DELETE
 	@Path("{assignmentId}")
-	public Response DeleteAssignment(@PathParam("assignmentId") int assignmentId) {
+	public Response DeleteAssignment(@PathParam("assignmentId") int assignmentId) throws ServiceException {
 		_assignmentService.DeleteAssignment(assignmentId);
 		return Response.ok("Class Deleted").build();
 	}
